@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"
+    />
+    <title>Emoji Remote Classic</title>
+    <meta name="theme-color" content="#102534" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Emoji Remote" />
+    <link rel="manifest" href="mobile-remote-v1.webmanifest" />
+    <link rel="apple-touch-icon" href="bubble.png" />
+    <link rel="stylesheet" href="mobile-remote-v1.css" />
+  </head>
+  <body>
+    <main class="phone-shell">
+      <section class="topbar">
+        <div>
+          <p class="eyebrow">远程控制</p>
+          <h1>Emoji Remote</h1>
+        </div>
+        <div class="connection-pill" id="connection-pill">未连接</div>
+      </section>
+
+      <nav class="tabbar" aria-label="页面切换">
+        <button class="tab-button is-active" data-tab="control" type="button">控制</button>
+        <button class="tab-button" data-tab="preview" type="button">预览</button>
+        <button class="tab-button" data-tab="history" type="button">历史</button>
+      </nav>
+
+      <section class="tab-page is-active" data-page="control">
+        <section class="preview-card preview-card-compact">
+          <div class="desktop-preview" id="desktop-preview">
+            <div class="preview-canvas">
+              <div class="preview-timer" id="preview-timer">00:00</div>
+              <div class="preview-note-box" id="preview-note-box">
+                <div class="preview-note-text size-large" id="preview-note-text">请输入文本</div>
+              </div>
+              <div class="preview-face-area">
+                <div class="preview-idle" id="preview-idle">程序未启动</div>
+                <div class="preview-emoji hidden" id="preview-emoji">😊</div>
+              </div>
+            </div>
+
+            <div class="preview-controls">
+              <div class="preview-button">重新校准表情</div>
+              <div class="preview-badge" id="preview-calibration">等待初始化</div>
+            </div>
+
+            <div class="preview-legend">微笑显示笑脸，没笑显示气泡。点击右上角便签可以编辑内容。</div>
+            <div class="preview-status" id="preview-status">未检测到人脸</div>
+          </div>
+        </section>
+
+        <section class="control-grid">
+          <button class="primary" id="start-btn" type="button">启动程序</button>
+          <button class="danger" id="stop-btn" type="button">停止程序</button>
+          <button class="secondary" id="reset-btn" type="button">重置状态</button>
+          <button class="secondary" id="calibrate-btn" type="button">重新校准</button>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>显示文字</h2>
+            <span class="hint" id="note-count">0 / 50</span>
+          </div>
+          <textarea
+            id="note-input"
+            maxlength="50"
+            placeholder="输入想显示在程序右上角便签里的文字"
+          ></textarea>
+          <div class="panel-actions">
+            <button class="secondary" id="apply-note-btn" type="button">更新文字</button>
+            <button class="ghost" id="clear-note-btn" type="button">清空文字</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-page" data-page="preview">
+        <section class="preview-card">
+          <div class="desktop-preview">
+            <div class="preview-canvas preview-canvas-large">
+              <div class="preview-timer" id="preview-timer-clone">00:00</div>
+              <div class="preview-note-box">
+                <div class="preview-note-text size-large" id="preview-note-text-clone">请输入文本</div>
+              </div>
+              <div class="preview-face-area">
+                <div class="preview-idle" id="preview-idle-clone">程序未启动</div>
+                <div class="preview-emoji hidden" id="preview-emoji-clone">😊</div>
+              </div>
+            </div>
+
+            <div class="preview-controls">
+              <div class="preview-button">重新校准表情</div>
+              <div class="preview-badge" id="preview-calibration-clone">等待初始化</div>
+            </div>
+
+            <div class="preview-legend">预览页会实时同步当前启动状态、文字内容和校准状态。</div>
+            <div class="preview-status" id="preview-status-clone">未检测到人脸</div>
+            <div class="preview-footer">Windows 启动版 · 双击即可打开 · 首次打开请允许摄像头权限</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>预览说明</h2>
+            <span class="hint">同步显示</span>
+          </div>
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-label">程序状态</span>
+              <strong id="preview-state-text">程序未启动</strong>
+            </div>
+            <div class="info-row">
+              <span class="info-label">当前文字</span>
+              <strong id="preview-note-summary">请输入文本</strong>
+            </div>
+            <div class="info-row">
+              <span class="info-label">校准状态</span>
+              <strong id="preview-calibration-summary">等待初始化</strong>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-page" data-page="history">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>当前状态</h2>
+            <span class="hint">最近动作</span>
+          </div>
+          <div class="feedback-banner" id="feedback-banner">等待操作</div>
+          <div class="history-summary">
+            <div class="summary-pill" id="history-running-pill">程序未启动</div>
+            <div class="summary-pill" id="history-note-pill">暂无文字</div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>历史记录</h2>
+            <span class="hint">保留最近 6 条</span>
+          </div>
+          <ul class="log-list" id="log-list"></ul>
+        </section>
+      </section>
+    </main>
+
+    <script src="mobile-remote-v1.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./mobile-remote-v1-sw.js").catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "Emoji Remote Classic",
+  "short_name": "Emoji Remote",
+  "description": "用于启动、停止、校准和编辑显示文字的手机端控制界面。",
+  "start_url": "./mobile-remote-v1.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102534",
+  "theme_color": "#102534",
+  "icons": [
+    {
+      "src": "bubble.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "bubble.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
