@@ -1,4 +1,4 @@
-const CACHE_NAME = "emoji-remote-classic-v1";
+const CACHE_NAME = "emoji-remote-classic-v1-20260603b";
 const APP_SHELL = [
   "./mobile-remote-v1.html",
   "./mobile-remote-v1.css",
