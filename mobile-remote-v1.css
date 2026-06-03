@@ -20,6 +20,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -32,11 +33,13 @@ body {
 
 .phone-shell {
   width: min(100%, 460px);
+  max-width: 460px;
   min-height: 100vh;
   margin: 0 auto;
   padding: calc(22px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom));
   display: grid;
   gap: 16px;
+  overflow-x: clip;
 }
 
 .topbar,
@@ -62,6 +65,12 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+}
+
+.topbar > div,
+.panel-header > *,
+.preview-controls > * {
+  min-width: 0;
 }
 
 .eyebrow,
@@ -107,6 +116,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
+  width: 100%;
 }
 
 .tab-button {
@@ -128,6 +138,8 @@ h2 {
 .tab-page {
   display: none;
   gap: 16px;
+  width: 100%;
+  min-width: 0;
 }
 
 .tab-page.is-active {
@@ -136,12 +148,16 @@ h2 {
 
 .preview-card {
   padding: 14px;
+  width: 100%;
+  min-width: 0;
 }
 
 .desktop-preview {
   border-radius: 24px;
   padding: 14px;
   background: #081420;
+  width: 100%;
+  min-width: 0;
 }
 
 .preview-canvas {
@@ -335,6 +351,8 @@ textarea {
   background: rgba(62, 121, 244, 0.16);
   color: #dfeaff;
   font-weight: 700;
+  width: 100%;
+  min-width: 0;
 }
 
 .log-list {
@@ -367,10 +385,136 @@ textarea {
   display: grid;
   gap: 12px;
   margin-top: 14px;
+  width: 100%;
+  min-width: 0;
 }
 
 .info-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  min-width: 0;
+}
+
+.tab-button,
+.connection-pill,
+.summary-pill,
+.info-row,
+.info-row strong,
+.info-row span,
+.log-list li {
+  min-width: 0;
+}
+
+.summary-pill,
+.info-row,
+.log-list li {
+  width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.preview-card-detail {
+  padding: 10px;
+}
+
+.preview-canvas-detail {
+  min-height: 0;
+  max-height: min(50vh, 340px);
+}
+
+.panel-compact {
+  padding: 14px;
+}
+
+.tab-page-preview {
+  gap: 12px;
+}
+
+.tab-page-preview .desktop-preview {
+  padding: 10px;
+}
+
+.tab-page-preview .preview-controls {
+  margin-top: 12px;
+  gap: 8px;
+}
+
+.tab-page-preview .preview-button,
+.tab-page-preview .preview-badge {
+  padding: 9px 12px;
+  font-size: 12px;
+}
+
+.tab-page-preview .preview-legend {
+  margin-top: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.tab-page-preview .preview-status {
+  margin-top: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+
+.tab-page-preview .preview-footer {
+  margin-top: 12px;
+  font-size: 11px;
+}
+
+.tab-page-preview .info-list {
+  margin-top: 8px;
+  gap: 8px;
+}
+
+.tab-page-preview .info-row {
+  padding: 10px 12px;
+}
+
+.tab-page-preview .preview-timer {
+  top: 10px;
+  left: 10px;
+  padding: 8px 12px;
+  font-size: 19px;
+}
+
+.tab-page-preview .preview-note-box {
+  top: 10px;
+  right: 10px;
+  width: 36%;
+  height: 20%;
+  padding: 10px;
+  border-radius: 14px;
+}
+
+.tab-page-preview .preview-idle {
+  padding: 12px 16px;
+  font-size: 20px;
+}
+
+@media (max-width: 420px) {
+  .tab-page-preview .preview-card-detail {
+    padding: 8px;
+  }
+
+  .tab-page-preview .preview-timer {
+    font-size: 17px;
+  }
+
+  .tab-page-preview .preview-note-box {
+    width: 39%;
+    height: 19%;
+  }
+
+  .tab-page-preview .preview-idle {
+    padding: 10px 14px;
+    font-size: 17px;
+  }
+
+  .tab-page-preview .preview-button,
+  .tab-page-preview .preview-badge {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
 }
